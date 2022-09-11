@@ -1,28 +1,26 @@
-import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Scanner;
 
 public class Solution1 {
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args){
 
-        try (BufferedReader reader = new BufferedReader(new FileReader("text13.txt"))) {
+        try (Scanner scanner = new Scanner (new FileReader("text13.txt"))) {
 
-            List<String> list = new ArrayList<>();
+            List<String> words = new ArrayList<>();
 
-            String temp;
-
-            while ((temp = reader.readLine()) != null) {
-                list.addAll(Arrays.asList(temp.split("\\W")));
+            while (scanner.hasNext()) {
+                String temp = scanner.next().replace(",", " ").trim();
+                words.add(temp);
             }
-            Collections.sort(list);
 
-            System.out.println(list);
+            Collections.sort(words);
 
+            System.out.println(words);
 
         } catch (IOException exception) {
             exception.printStackTrace();

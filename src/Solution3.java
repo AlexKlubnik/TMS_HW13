@@ -1,16 +1,13 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.*;
 
 public class Solution3 {
 
     public static void main(String[] args) {
 
-        Map<String, List<String>> food = new HashMap<>();
-        food.put("fruits", new ArrayList<>());
-        food.put("berries", new ArrayList<>());
-        food.put("vegetables", new ArrayList<>());
+        Map<String, List<String>> products = new HashMap<>();
+        products.put("fruits", new ArrayList<>());
+        products.put("berries", new ArrayList<>());
+        products.put("vegetables", new ArrayList<>());
 
 
         System.out.println("""
@@ -19,27 +16,31 @@ public class Solution3 {
                  "b" - for berries;
                  "v" - for vegetables.""");
 
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
+        try (Scanner scanner = new Scanner(System.in)) {
 
             int productCounter = 0;
 
-            while (productCounter < 3) {// удалить sc.hasnext, сделать фори со счетчиком по вставляемым продуктам
-                if (reader.readLine().equals("f")) {
-                    food.get("fruits").add(reader.readLine());
-                    productCounter++;
-                } else if (reader.readLine().equals("b")) {
-                    food.get("berries").add(reader.readLine());
-                    productCounter++;
-                } else if (reader.readLine().equals("v")) {
-                    food.get("vegetables").add(reader.readLine());
-                    productCounter++;
+            while (productCounter < 6) {
+                String category = scanner.nextLine();
+                String product = scanner.nextLine();
+                switch (category) {
+                    case "f":
+                        products.get("fruits").add(product);
+                        productCounter++;
+                        break;
+                    case "b":
+                        products.get("berries").add(product);
+                        productCounter++;
+                        break;
+                    case "v":
+                        products.get("vegetables").add(product);
+                        productCounter++;
+                        break;
                 }
-
             }
-
-            System.out.println(food);
-        } catch (IOException e) {
-            e.printStackTrace();
+            for (Map.Entry<String, List<String>> entry : products.entrySet()) {
+                System.out.println("Category: " + entry.getKey() + " - products: " + entry.getValue());
+            }
         }
 
     }

@@ -1,28 +1,24 @@
-import java.io.BufferedReader;
-import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.IOException;
-import java.util.Arrays;
 import java.util.HashSet;
+import java.util.Scanner;
 import java.util.Set;
 
 public class Solution2 {
 
     public static void main(String[] args) {
-        File file = new File("text13_1.txt");
 
-        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+        try (Scanner scanner = new Scanner(new FileReader("text13_1.txt"))) {
 
-            String temp;
+            Set<Integer> numbers = new HashSet<>();
 
-            Set<String> set = new HashSet<>();
-
-            while ((temp = br.readLine()) != null) {
-                set.addAll(Arrays.asList(temp.split("\\W")));
+            while (scanner.hasNextInt()) {
+                numbers.add(scanner.nextInt());
             }
-            System.out.println(set);
 
-        } catch (IOException exception) {
+            System.out.println(numbers);
+
+        } catch (FileNotFoundException exception) {
             exception.printStackTrace();
         }
     }
