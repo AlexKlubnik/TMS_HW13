@@ -10,19 +10,22 @@ public class Solution3 {
         products.put("vegetables", new ArrayList<>());
 
 
-        System.out.println("""
-                Choose type of food:
-                 "f" - for fruits;
-                 "b" - for berries;
-                 "v" - for vegetables.""");
-
         try (Scanner scanner = new Scanner(System.in)) {
 
             int productCounter = 0;
+            while (true) {
 
-            while (productCounter < 6) {
+
+                System.out.println("""
+                        Choose type of food:
+                         "f" - for fruits;
+                         "b" - for berries;
+                         "v" - for vegetables.""");
                 String category = scanner.nextLine();
+
+                System.out.println("Enter the product:");
                 String product = scanner.nextLine();
+
                 switch (category) {
                     case "f":
                         products.get("fruits").add(product);
@@ -36,6 +39,9 @@ public class Solution3 {
                         products.get("vegetables").add(product);
                         productCounter++;
                         break;
+                }
+                if (productCounter == 10) {
+                    break;
                 }
             }
             for (Map.Entry<String, List<String>> entry : products.entrySet()) {
